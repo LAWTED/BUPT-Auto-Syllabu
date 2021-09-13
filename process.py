@@ -4,11 +4,45 @@ import random
 import string
 import re
 import datetime
+import math
 
 # 常量
 year = '2021' # 今年
 begin_week = 36 # 开学的当周
 year_week = 52 # 今年总周数
+
+keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+
+def encodeInp(input):
+  output = ''
+  chr1, chr2, chr3 = '', '', ''
+  enc1, enc2, enc3 = '', '', ''
+  i = 0
+  while True:
+    chr1 = ord(input[i])
+    i += 1
+    chr2 = ord(input[i]) if i < len(input) else 0
+    i += 1
+    chr3 = ord(input[i]) if i < len(input) else 0
+    i += 1
+    enc1 = chr1 >> 2
+    enc2 = ((chr1 & 3) << 4) | (chr2 >> 4)
+    enc3 = ((chr2 & 15) << 2) | (chr3 >> 6)
+    enc4 = chr3 & 63
+    print(chr1, chr2, chr3)
+    if chr2 == 0:
+      enc3 = enc4 = 64
+    elif chr3 == 0:
+      enc4 = 64
+    output = output + keyStr[enc1] + keyStr[enc2] + keyStr[enc3] + keyStr[enc4]
+    chr1 = chr2 = chr3 = ''
+    enc1 = enc2 = enc3 = enc4 = ''
+    if i >= len(input):
+      break
+  return output
+
+encoded = encodeInp('2019213239') + '%%%' + encodeInp('wy020320')
+print(encoded)
 
 class lesson:
   name = ''

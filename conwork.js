@@ -85,7 +85,7 @@ function find(p, a, c, k, e, d) {
   }
   while (c--)
     if (k[c]) p = p.replace(new RegExp("\\b" + e(c) + "\\b", "g"), k[c]);
-  console.log(p);
+  // console.log(p);
   return p;
 }
 
@@ -151,6 +151,7 @@ function encodeInp(input) {
     enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
     enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
     enc4 = chr3 & 63;
+    console.log(chr1, chr2, chr3)
     if (isNaN(chr2)) {
       enc3 = enc4 = 64;
     } else if (isNaN(chr3)) {
@@ -162,6 +163,7 @@ function encodeInp(input) {
       keyStr.charAt(enc2) +
       keyStr.charAt(enc3) +
       keyStr.charAt(enc4);
+
     chr1 = chr2 = chr3 = "";
     enc1 = enc2 = enc3 = enc4 = "";
   } while (i < input.length);
