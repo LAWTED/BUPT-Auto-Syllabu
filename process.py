@@ -5,6 +5,7 @@ import string
 import re
 import datetime
 import math
+import requests
 
 # 常量
 year = '2021' # 今年
@@ -41,9 +42,10 @@ def encodeInp(input):
       break
   return output
 
-encoded = encodeInp('2019213239') + '%%%' + encodeInp('wy020320')
-print(encoded)
-
+encoded = encodeInp('2019213232') + '%%%' + encodeInp('07084010wmz')
+# print(encoded)
+payload = {'userAccount': '2019213232', 'userPassWord': '', 'encoded': encoded}
+r = requests.post('https://jwgl.bupt.edu.cn/jsxsd/', data=payload)
 class lesson:
   name = ''
   week = ''
