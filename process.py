@@ -145,7 +145,7 @@ headers = {
   'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36',
   "cookie": cookie
 }
-payload = {'userAccount': '2019213232', 'userPassWord': '', 'encoded': encoded}
+payload = {'userAccount': BUPT_ID, 'userPassWord': '', 'encoded': encoded}
 l5 = session.post('https://jwgl.bupt.edu.cn/jsxsd/xk/LoginToXk', data=payload, headers=headers)
 for i in range(3500,4600):
   pb.print_next()
@@ -245,6 +245,64 @@ res_txt = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\n'
 for i in range(8000,9900):
   pb.print_next()
 
+def write_file(f, res_txt, name, place, date, time_start, time_end):
+  f.write('BEGIN:VEVENT')
+  f.write('\n')
+  res_txt += 'BEGIN:VEVENT'
+  res_txt += '\r\n'
+  f.write('DTSTAMP:20201012T104622Z')
+  f.write('\n')
+  res_txt += 'DTSTAMP:20201012T104622Z'
+  res_txt += '\r\n'
+  f.write('UID:' + randomUID())
+  f.write('\n')
+  res_txt += 'UID:' + randomUID()
+  res_txt += '\r\n'
+  f.write('SUMMARY:{} {}'.format(name,place))
+  f.write('\n')
+  res_txt += 'SUMMARY:{} {}'.format(name,place)
+  res_txt += '\r\n'
+  f.write('DTSTART;TZID=Asia/Shanghai:{}T{}'.format(date, time_start))
+  f.write('\n')
+  res_txt += 'DTSTART;TZID=Asia/Shanghai:{}T{}'.format(date, time_start)
+  res_txt += '\r\n'
+  f.write('DTEND;TZID=Asia/Shanghai:{}T{}'.format(date, time_end))
+  f.write('\n')
+  res_txt += 'DTEND;TZID=Asia/Shanghai:{}T{}'.format(date, time_end)
+  res_txt += '\r\n'
+  f.write('BEGIN:VALARM')
+  f.write('\n')
+  res_txt += 'BEGIN:VALARM'
+  res_txt += '\r\n'
+  f.write('X-WR-ALARMUID:F03864BD-41F4-40EC-BF20-1E4E7930ED92')
+  f.write('\n')
+  res_txt += 'X-WR-ALARMUID:F03864BD-41F4-40EC-BF20-1E4E7930ED92'
+  res_txt += '\r\n'
+  f.write('UID:' + randomUID())
+  f.write('\n')
+  res_txt += 'UID:' + randomUID()
+  res_txt += '\r\n'
+  f.write('TRIGGER:-PT5M')
+  f.write('\n')
+  res_txt += 'TRIGGER:-PT5M'
+  res_txt += '\r\n'
+  f.write('ATTACH;VALUE=URI:Chord')
+  f.write('\n')
+  res_txt += 'ATTACH;VALUE=URI:Chord'
+  res_txt += '\r\n'
+  f.write('ACTION:AUDIO')
+  f.write('\n')
+  res_txt += 'ACTION:AUDIO'
+  res_txt += '\r\n'
+  f.write('END:VALARM')
+  f.write('\n')
+  res_txt += 'END:VALARM'
+  res_txt += '\r\n'
+  f.write('END:VEVENT')
+  f.write('\n')
+  res_txt += 'END:VEVENT'
+  res_txt += '\r\n'
+
 for l in all_lesson:
   # print(l['name'])
   name = l['name']
@@ -258,86 +316,29 @@ for l in all_lesson:
   time_seven = time.split('+')[1]
   date = []
   for week_item in week_all:
-    if len(week_item) == 1:
-      week_item_begin = week_item
-      week_item_end = week_item
+    # if len(week_item) == 1:
+    #   print(week_item)
+    #   week_item_begin = week_item
+    #   week_item_end = week_item
+    if not '-' in week_item:
+      d = year + '-W' + str(int(week_item)+begin_week-2) + '-' + str(time_seven)
+      r = datetime.datetime.strptime(d, "%Y-W%W-%w")
+      date = r.strftime('%Y%m%d')
+      # print(name, place, date, time_start, time_end)
+      write_file(f, res_txt, name, place, date, time_start, time_end)
     else:
       week_item_begin = week_item.split('-')[0]
       week_item_end = week_item.split('-')[1]
-    # print(week_item_begin, week_item_end)
-    for week_iter in range(int(week_item_begin)+begin_week-2, int(week_item_end)+begin_week-1):
-      d = year + '-W' + str(week_iter) + '-' + str(time_seven)
-      r = datetime.datetime.strptime(d, "%Y-W%W-%w")
-      date = r.strftime('%Y%m%d')
+      # print(week_item_begin, week_item_end)
+      for week_iter in range(int(week_item_begin)+begin_week-2, int(week_item_end)+begin_week-1):
+        d = year + '-W' + str(week_iter) + '-' + str(time_seven)
+        r = datetime.datetime.strptime(d, "%Y-W%W-%w")
+        date = r.strftime('%Y%m%d')
+        # print(name, place, date, time_start, time_end)
+        write_file(f, res_txt, name, place, date, time_start, time_end)
       # date.append(a)
       # print(name,place,date,time_start,time_end)
-      f.write('BEGIN:VEVENT')
-      f.write('\n')
-      res_txt += 'BEGIN:VEVENT'
-      res_txt += '\r\n'
-      f.write('DTSTAMP:20201012T104622Z')
-      f.write('\n')
-      res_txt += 'DTSTAMP:20201012T104622Z'
-      res_txt += '\r\n'
-      f.write('UID:' + randomUID())
-      f.write('\n')
-      res_txt += 'UID:' + randomUID()
-      res_txt += '\r\n'
 
-      f.write('SUMMARY:{} {}'.format(name,place))
-      f.write('\n')
-      res_txt += 'SUMMARY:{} {}'.format(name,place)
-      res_txt += '\r\n'
-
-      f.write('DTSTART;TZID=Asia/Shanghai:{}T{}'.format(date, time_start))
-      f.write('\n')
-      res_txt += 'DTSTART;TZID=Asia/Shanghai:{}T{}'.format(date, time_start)
-      res_txt += '\r\n'
-
-      f.write('DTEND;TZID=Asia/Shanghai:{}T{}'.format(date, time_end))
-      f.write('\n')
-      res_txt += 'DTEND;TZID=Asia/Shanghai:{}T{}'.format(date, time_end)
-      res_txt += '\r\n'
-
-      f.write('BEGIN:VALARM')
-      f.write('\n')
-      res_txt += 'BEGIN:VALARM'
-      res_txt += '\r\n'
-
-      f.write('X-WR-ALARMUID:F03864BD-41F4-40EC-BF20-1E4E7930ED92')
-      f.write('\n')
-      res_txt += 'X-WR-ALARMUID:F03864BD-41F4-40EC-BF20-1E4E7930ED92'
-      res_txt += '\r\n'
-
-      f.write('UID:' + randomUID())
-      f.write('\n')
-      res_txt += 'UID:' + randomUID()
-      res_txt += '\r\n'
-
-      f.write('TRIGGER:-PT5M')
-      f.write('\n')
-      res_txt += 'TRIGGER:-PT5M'
-      res_txt += '\r\n'
-
-      f.write('ATTACH;VALUE=URI:Chord')
-      f.write('\n')
-      res_txt += 'ATTACH;VALUE=URI:Chord'
-      res_txt += '\r\n'
-
-      f.write('ACTION:AUDIO')
-      f.write('\n')
-      res_txt += 'ACTION:AUDIO'
-      res_txt += '\r\n'
-
-      f.write('END:VALARM')
-      f.write('\n')
-      res_txt += 'END:VALARM'
-      res_txt += '\r\n'
-
-      f.write('END:VEVENT')
-      f.write('\n')
-      res_txt += 'END:VEVENT'
-      res_txt += '\r\n'
 f.write('END:VCALENDAR')
 res_txt += 'END:VCALENDAR'
 f.close()
