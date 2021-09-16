@@ -28,7 +28,7 @@ python process.py
 
 
 
-### 如果是`Windos `的电脑
+### 如果是`Windos`的电脑
 
 > 将`direct.txt `发送文件到手机(比如微信文件传输助手)， 再苹果手机中存储到文件，打开文件`direct.txt `复制所有内容，到`safari`浏览器中地址栏粘贴跳转，然后导入苹果日历
 
