@@ -9,6 +9,7 @@ import requests
 import time
 import os
 import math
+import platform
 
 class ProcessBar(object):
   def __init__(self, total):  # 初始化传入总数
@@ -35,7 +36,12 @@ class ProcessBar(object):
     if self.now == self.total:
       print('')
 
-os.system("clear")
+if platform.system().lower() == 'windows':
+  os.system("cls")
+else:
+  os.system("clear")
+
+
 print('这是一个从BUPT教务爬取课程表并转为苹果日历的脚本 BY LAWTED')
 time.sleep(1)
 
@@ -77,7 +83,11 @@ if not keyStr:
   print('---叫你别改那个---') 
   quit()
   
-os.system("clear")
+
+if platform.system().lower() == 'windows':
+  os.system("cls")
+else:
+  os.system("clear")
 for i in range(1000):
   pb.print_next()
 
