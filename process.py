@@ -11,6 +11,11 @@ import os
 import math
 import platform
 
+# 高级设置
+year = '2021' # 今年
+begin_week = 36 # 开学的当周，苹果日历中查看，打开设置中的周数
+year_week = 52 # 今年总周数
+Combine_Trigger = True # 连着几节的课程是否合并
 class ProcessBar(object):
   def __init__(self, total):  # 初始化传入总数
     self.shape = ['▏', '▎', '▍', '▋', '▊', '▉']
@@ -23,7 +28,7 @@ class ProcessBar(object):
       self.now += 1
     else:
       self.now = now
-        
+
     rate = math.ceil((self.now / self.total) * (self.row_num * self.shape_num))
     head = rate // self.shape_num
     tail = rate % self.shape_num
@@ -54,11 +59,7 @@ time.sleep(1)
 BUPT_ID = input('请输入你的学号: ')
 BUPT_PASS = input('请输入你的新教务密码: ')
 
-# 高级设置
-year = '2021' # 今年
-begin_week = 36 # 开学的当周，苹果日历中查看，打开设置中的周数
-year_week = 52 # 今年总周数
-Combine_Trigger = True # 连着几节的课程是否合并
+
 
 # 别动
 keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=' # DO NOT CHANGE!!!
@@ -80,9 +81,9 @@ if not BUPT_PASS:
   print('---请填入你的密码，本项目在源码公开，不存在泄露密码操作---')
   quit()
 if not keyStr:
-  print('---叫你别改那个---') 
+  print('---叫你别改那个---')
   quit()
-  
+
 
 if platform.system().lower() == 'windows':
   os.system("cls")
