@@ -12,8 +12,9 @@ import math
 import platform
 
 # 高级设置
-year = '2021' # 今年
-begin_week = 36 # 开学的当周，苹果日历中查看，打开设置中的周数
+year = '2022' # 年份
+xueqi = '2021-2022-2' # 学期数
+begin_week = 9 # 开学的当周，苹果日历中查看，打开设置中的周数
 year_week = 52 # 今年总周数
 Combine_Trigger = True # 连着几节的课程是否合并
 class ProcessBar(object):
@@ -58,6 +59,7 @@ print("------------------NOW LET'S BEGIN!!!------------------")
 time.sleep(1)
 BUPT_ID = input('请输入你的学号: ')
 BUPT_PASS = input('请输入你的新教务密码: ')
+
 
 
 
@@ -163,8 +165,9 @@ time.sleep(3)
 headers = {
   "cookie": cookie
 }
-data = {'xnxq01id': '2021-2022-1', 'zc': '', 'kbjcmsid': '9475847A3F3033D1E05377B5030AA94D'}
-p = requests.post('https://jwgl.bupt.edu.cn/jsxsd/xskb/xskb_print.do?xnxq01id=2021-2022-1&zc=&kbjcmsid=9475847A3F3033D1E05377B5030AA94D', data=data, headers=headers)
+data = {'xnxq01id': xueqi, 'zc': '', 'kbjcmsid': '9475847A3F3033D1E05377B5030AA94D'}
+url = 'https://jwgl.bupt.edu.cn/jsxsd/xskb/xskb_print.do?xnxq01id={}&zc=&kbjcmsid=9475847A3F3033D1E05377B5030AA94D'.format(xueqi)
+p = requests.post(url, data=data, headers=headers)
 if 'html' in p.text:
   print('\n------------------密码错误------------------')
   quit()
@@ -245,7 +248,8 @@ res_txt = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\n'
 for i in range(8000,9900):
   pb.print_next()
 
-def write_file(f, res_txt, name, place, date, time_start, time_end):
+def write_file(f, name, place, date, time_start, time_end):
+  global res_txt
   f.write('BEGIN:VEVENT')
   f.write('\n')
   res_txt += 'BEGIN:VEVENT'
@@ -302,6 +306,7 @@ def write_file(f, res_txt, name, place, date, time_start, time_end):
   f.write('\n')
   res_txt += 'END:VEVENT'
   res_txt += '\r\n'
+  # print(res_txt)
 
 for l in all_lesson:
   # print(l['name'])
@@ -315,17 +320,18 @@ for l in all_lesson:
   time_end = ''.join(time_all.split('-')[1].split(':')) + '00'
   time_seven = time.split('+')[1]
   date = []
+  # print(week_all)
   for week_item in week_all:
     # if len(week_item) == 1:
     #   print(week_item)
     #   week_item_begin = week_item
     #   week_item_end = week_item
     if not '-' in week_item:
-      d = year + '-W' + str(int(week_item)+begin_week-2) + '-' + str(time_seven)
+      d = year + '-W' + str(int(week_item)+begin_week-1) + '-' + str(time_seven)
       r = datetime.datetime.strptime(d, "%Y-W%W-%w")
       date = r.strftime('%Y%m%d')
       # print(name, place, date, time_start, time_end)
-      write_file(f, res_txt, name, place, date, time_start, time_end)
+      write_file(f, name, place, date, time_start, time_end)
     else:
       week_item_begin = week_item.split('-')[0]
       week_item_end = week_item.split('-')[1]
@@ -335,7 +341,7 @@ for l in all_lesson:
         r = datetime.datetime.strptime(d, "%Y-W%W-%w")
         date = r.strftime('%Y%m%d')
         # print(name, place, date, time_start, time_end)
-        write_file(f, res_txt, name, place, date, time_start, time_end)
+        write_file(f, name, place, date, time_start, time_end)
       # date.append(a)
       # print(name,place,date,time_start,time_end)
 

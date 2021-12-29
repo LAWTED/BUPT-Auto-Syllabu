@@ -1,7 +1,7 @@
 # BUPT-Auto-Syllabu
 #### ![](https://img.shields.io/badge/author-Lawted-lightpink) ![GitHub](https://img.shields.io/github/license/LAWTED/BUPT-Auto-Syllabu) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/LAWTED/BUPT-Auto-Syllabu) ![GitHub top language](https://img.shields.io/github/languages/top/LAWTED/BUPT-Auto-Syllabu?color=56ccf2) ![GitHub last commit](https://img.shields.io/github/last-commit/LAWTED/BUPT-Auto-Syllabu?color=yellow)
 
-自动获取北邮课表导入苹果日历 
+自动获取北邮课表导入苹果日历
 
 ## 环境配置
 
@@ -40,8 +40,9 @@ python process.py
 
 ```python
 # 高级设置
-year = '2021' # 今年
-begin_week = 36 # 开学的当周，苹果日历中查看，打开设置中的周数
+year = '2022' # 年份
+xueqi = '2021-2022-2' # 学期数
+begin_week = 9 # 开学的当周，苹果日历中查看，打开设置中的周数
 year_week = 52 # 今年总周数
 Combine_Trigger = True # 连着几节的课程是否合并
 ```
