@@ -1380,10 +1380,22 @@ natural-compare@^1.4.0:
   resolved "https://registry.npmmirror.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
+node-bin-setup@^1.0.0:
+  version "1.1.0"
+  resolved "https://mirrors.tencent.com/npm/node-bin-setup/-/node-bin-setup-1.1.0.tgz#9df94c41335a8f41958a639b2736f860582a209c"
+  integrity sha512-pTeU6NgUrexiLNtd+AKwvg6cngHMvj5FZ5e2bbv2ogBSIc9yhkXSSaTScfSRZnwHIh5YFmYSYlemLWkiKD7rog==
+
 node-releases@^2.0.2:
   version "2.0.2"
   resolved "https://registry.npmmirror.com/node-releases/-/node-releases-2.0.2.tgz#7139fe71e2f4f11b47d4d2986aaf8c48699e0c01"
   integrity sha512-XxYDdcQ6eKqp/YjI+tb2C5WM2LgjnZrfYg4vgQt49EK268b6gYCHsBLrK2qvJo4FmCtqmKezb0WZFK4fkrZNsg==
+
+node@^16.13.2:
+  version "16.13.2"
+  resolved "https://mirrors.tencent.com/npm/node/-/node-16.13.2.tgz#9a865ff3ef7c22477bb21539997190b118eda878"
+  integrity sha512-6x0hohLASL0XaehYn1mrVw1UiiRjoxrujBxjqHGxGe/rFKKCJcDhoa5wNxxvBbyJm6mNgZYuzg0JTwvXmpeWWw==
+  dependencies:
+    node-bin-setup "^1.0.0"
 
 normalize-path@^3.0.0, normalize-path@~3.0.0:
   version "3.0.0"
