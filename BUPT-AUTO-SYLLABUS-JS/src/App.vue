@@ -1,4 +1,5 @@
 <template>
+  <notifications />
   <div class="font-sans">
     <div class="relative min-h-screen flex flex-col justify-center items-center bg-gray-100 p-8">
       <div class="relative sm:max-w-sm w-full">
@@ -44,11 +45,30 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
 
 const id = ref("");
 const pw = ref("");
 const send = () => {
-  axios.get("https://jwgl.bupt.edu.cn/jsxsd/");
+  if (id.value === "" || pw.value === "") {
+    notify({
+      type: 'warn',
+      text: 'Please check your inputs'
+    });
+  } else {
+    axios({
+      url: '/api/login/',
+      params: {
+        id: id.value,
+        pw: pw.value
+      }
+    })
+    // axios.get('/api/login')
+    notify({
+      type: 'success',
+      text: 'Login in success'
+    });
+  }
 };
 </script>
 
