@@ -98,16 +98,15 @@ def login(request):
     time = ''
 
   wb = xlrd.open_workbook("./a.xls")
-  os.remove("./a.xls")
   ws = wb.sheet_by_index(0)
   nrows = ws.nrows
   ncols = ws.ncols
-
 
   col_values = ws.col_values(colx=0)
   realtime_list = col_values[3:17]
   realtime_list = [time.split('\n')[1] for time in realtime_list]
   all_lesson = []
+  os.remove("./a.xls")
   # list(realtime_list)
   # print(realtime_list)
   for col in range(1,6):
@@ -143,21 +142,21 @@ def login(request):
         tmplesson = all_lesson.pop()
         tmplesson['time'] = tmplesson['time'].split('-')[0] + '-' +realtime_list[row-3].split('-')[1] + '+' + str(col)
         all_lesson.append(tmplesson)
+  # print(len(all_lesson))
   # print(all_lesson)
+
   # 写入头文件
-  f=open('apple_calendar.ics','w',encoding='utf-8')
+
   head=['BEGIN:VCALENDAR',
   'VERSION:2.0',
   ]
-  for i in head:
-    f.write(i)
-    f.write('\n')
   def randomUID():
     return ''.join(random.sample(['z','y','x','w','v','u','t','s','r','q','p','o','n','m','l','k','j','i','h','g','f','e','d','c','b','a'], 15))
 
   res_txt = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\n'
 
-  def write_file(res_txt, name, place, date, time_start, time_end):
+  def write_file(f, name, place, date, time_start, time_end):
+    nonlocal res_txt
     res_txt += 'BEGIN:VEVENT'
     res_txt += '\r\n'
     res_txt += 'DTSTAMP:20201012T104622Z'
@@ -186,6 +185,7 @@ def login(request):
     res_txt += '\r\n'
     res_txt += 'END:VEVENT'
     res_txt += '\r\n'
+    # print(res_txt)
 
   for l in all_lesson:
     # print(l['name'])
@@ -210,7 +210,7 @@ def login(request):
         r = datetime.datetime.strptime(d, "%Y-W%W-%w")
         date = r.strftime('%Y%m%d')
         # print(name, place, date, time_start, time_end)
-        write_file(res_txt, name, place, date, time_start, time_end)
+        write_file(f, name, place, date, time_start, time_end)
       else:
         week_item_begin = week_item.split('-')[0]
         week_item_end = week_item.split('-')[1]
@@ -220,16 +220,16 @@ def login(request):
           r = datetime.datetime.strptime(d, "%Y-W%W-%w")
           date = r.strftime('%Y%m%d')
           # print(name, place, date, time_start, time_end)
-          write_file(res_txt, name, place, date, time_start, time_end)
+          write_file(f, name, place, date, time_start, time_end)
         # date.append(a)
         # print(name,place,date,time_start,time_end)
 
-    res_txt += 'END:VCALENDAR'
-
-    import urllib.parse
+  res_txt += 'END:VCALENDAR'
 
 
-    res_txt = urllib.parse.quote(res_txt, safe='~@#$&()*!+=:;,.?/\'')
-    #使用二进制格式保存转码后的文本
-    res_txt = 'data:text/calendar,' + res_txt
+  import urllib.parse
+
+  res_txt = urllib.parse.quote(res_txt, safe='~@#$&()*!+=:;,.?/\'')
+  #使用二进制格式保存转码后的文本
+  res_txt = 'data:text/calendar,' + res_txt
   return HttpResponse(res_txt)

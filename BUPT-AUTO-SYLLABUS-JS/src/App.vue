@@ -9,13 +9,14 @@
           <label for="" class="block mt-3 text-xl text-gray-700 text-center font-semibold">
             北邮课表转苹果原生日历
           </label>
+          <p class="text-gray-300 text-sm">仅供iPhone, iPad的Safari浏览器中使用</p>
           <div class="mt-10">
             <div>
-              <input type="id" v-model="id" placeholder="请输入学号" class="p-4 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+              <input type="id" v-model="id" placeholder="请输入学号" class="p-4 mt-1 block w-full border-blue-400 border-2 bg-gray-100 h-11 rounded-xl shadow-lg  ">
             </div>
 
             <div class="mt-7">
-              <input type="password" v-model="pw" placeholder="请输入新教务密码" class="p-4 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:ring-0">
+              <input type="password" v-model="pw" placeholder="请输入新教务密码" class="p-4 mt-1 block w-full border-blue-400 border-2 bg-gray-100 h-11 rounded-xl shadow-lg ">
             </div>
 
             <div class="mt-7 flex">
@@ -35,7 +36,7 @@
               <hr class="border-gray-300 border-1 w-full rounded-md">
             </div>
           </div>
-          <button @click='openurl'>Open Google search</button>
+          <button @click='openurl' v-show="src !== ''">点击查看课表</button>
         </div>
       </div>
     </div>
@@ -65,7 +66,6 @@ const send = () => {
       }
     }).then((res) => {
       src.value = res.data
-      console.log(src.value)
     })
     // axios.get('/api/login')
     notify({
