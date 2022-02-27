@@ -35,10 +35,10 @@
               <hr class="border-gray-300 border-1 w-full rounded-md">
             </div>
           </div>
+          <button @click='openurl'>Open Google search</button>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -49,6 +49,7 @@ import { notify } from "@kyvg/vue3-notification";
 
 const id = ref("");
 const pw = ref("");
+const src = ref("");
 const send = () => {
   if (id.value === "" || pw.value === "") {
     notify({
@@ -62,6 +63,9 @@ const send = () => {
         id: id.value,
         pw: pw.value
       }
+    }).then((res) => {
+      src.value = res.data
+      console.log(src.value)
     })
     // axios.get('/api/login')
     notify({
@@ -70,6 +74,9 @@ const send = () => {
     });
   }
 };
+const openurl = () => {
+  window.open(src.value, "_blank");
+}
 </script>
 
 <style>

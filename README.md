@@ -47,3 +47,7 @@ year_week = 52 # 今年总周数
 Combine_Trigger = True # 连着几节的课程是否合并
 ```
 
+# linux 连接校园网
+```
+sudo openconnect --protocol=gp --script=/etc/vpnc/vpnc-script vpn.bupt.edu.cn
+```
