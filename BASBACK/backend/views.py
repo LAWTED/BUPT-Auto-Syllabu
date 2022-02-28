@@ -120,6 +120,7 @@ def login(request):
           cells = cells[1:]
           # 去掉括号
           cells[0] = cells[0][1:-1]
+          cells_list.append(cells)
         # 两种课程写一起了
         elif len(cells) == 10:
           cells1 = cells[5:]
