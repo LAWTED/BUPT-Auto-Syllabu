@@ -336,7 +336,7 @@ for l in all_lesson:
       week_item_begin = week_item.split('-')[0]
       week_item_end = week_item.split('-')[1]
       # print(week_item_begin, week_item_end)
-      for week_iter in range(int(week_item_begin)+begin_week-1, int(week_item_end)+begin_week-1):
+      for week_iter in range(int(week_item_begin)+begin_week-1, int(week_item_end)+begin_week):
         d = year + '-W' + str(week_iter) + '-' + str(time_seven)
         r = datetime.datetime.strptime(d, "%Y-W%W-%w")
         date = r.strftime('%Y%m%d')
