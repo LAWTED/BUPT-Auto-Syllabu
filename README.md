@@ -6,8 +6,7 @@
 # version 2.0
 直接访问 lawted.tech (推荐)
 
-![25b6bb50604c3ad0211e4f4edef4e2a0](https://user-images.githubusercontent.com/56634309/155940362-19c70b23-2dad-4b15-84c0-752cd177c61b.gif)
-
+<img src="https://user-images.githubusercontent.com/56634309/155940362-19c70b23-2dad-4b15-84c0-752cd177c61b.gif" width="25%">
 
 # version 1.0 (不推荐)
 
