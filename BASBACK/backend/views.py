@@ -121,12 +121,12 @@ def login(request):
           # 去掉括号
           cells[0] = cells[0][1:-1]
         # 两种课程写一起了
-        if len(cells) == 10:
+        elif len(cells) == 10:
           cells1 = cells[5:]
           cells2 = cells[:5]
           cells_list.append(cells1)
           cells_list.append(cells2)
-        if len(cells) == 11 and '节' in cells[5]:
+        elif len(cells) == 11 and '节' in cells[5]:
           cells1 = cells[6:]
           cells2 = cells[:6]
           cells2 = cells2[1:]
@@ -134,7 +134,7 @@ def login(request):
           cells2[0] = cells2[0][1:-1]
           cells_list.append(cells1)
           cells_list.append(cells2)
-        if len(cells) == 11 and '节' not in cells[5]:
+        elif len(cells) == 11 and '节' not in cells[5]:
           cells1 = cells[5:]
           cells2 = cells[:5]
           cells1 = cells1[1:]
