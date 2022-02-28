@@ -121,9 +121,25 @@ def login(request):
           # 去掉括号
           cells[0] = cells[0][1:-1]
         # 两种课程写一起了
-        if len(cells) > 5:
+        if len(cells) == 10:
           cells1 = cells[5:]
           cells2 = cells[:5]
+          cells_list.append(cells1)
+          cells_list.append(cells2)
+        if len(cells) == 11 and '节' in cells[5]:
+          cells1 = cells[6:]
+          cells2 = cells[:6]
+          cells2 = cells2[1:]
+          # 去掉括号
+          cells2[0] = cells2[0][1:-1]
+          cells_list.append(cells1)
+          cells_list.append(cells2)
+        if len(cells) == 11 and '节' not in cells[5]:
+          cells1 = cells[5:]
+          cells2 = cells[:5]
+          cells1 = cells1[1:]
+          # 去掉括号
+          cells1[0] = cells1[0][1:-1]
           cells_list.append(cells1)
           cells_list.append(cells2)
         else:
@@ -155,7 +171,7 @@ def login(request):
 
   res_txt = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\n'
 
-  def write_file(f, name, place, date, time_start, time_end):
+  def write_file(name, place, date, time_start, time_end):
     nonlocal res_txt
     res_txt += 'BEGIN:VEVENT'
     res_txt += '\r\n'
@@ -210,7 +226,7 @@ def login(request):
         r = datetime.datetime.strptime(d, "%Y-W%W-%w")
         date = r.strftime('%Y%m%d')
         # print(name, place, date, time_start, time_end)
-        write_file(f, name, place, date, time_start, time_end)
+        write_file(name, place, date, time_start, time_end)
       else:
         week_item_begin = week_item.split('-')[0]
         week_item_end = week_item.split('-')[1]
@@ -220,7 +236,7 @@ def login(request):
           r = datetime.datetime.strptime(d, "%Y-W%W-%w")
           date = r.strftime('%Y%m%d')
           # print(name, place, date, time_start, time_end)
-          write_file(f, name, place, date, time_start, time_end)
+          write_file(name, place, date, time_start, time_end)
         # date.append(a)
         # print(name,place,date,time_start,time_end)
 

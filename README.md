@@ -1,16 +1,21 @@
 # BUPT-Auto-Syllabu
-#### ![](https://img.shields.io/badge/author-Lawted-lightpink) ![GitHub](https://img.shields.io/github/license/LAWTED/BUPT-Auto-Syllabu) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/LAWTED/BUPT-Auto-Syllabu) ![GitHub top language](https://img.shields.io/github/languages/top/LAWTED/BUPT-Auto-Syllabu?color=56ccf2) ![GitHub last commit](https://img.shields.io/github/last-commit/LAWTED/BUPT-Auto-Syllabu?color=yellow)
+#### ![](https://img.shields.io/badge/author-Lawted-lightpink) ![GitHub](https://img.shields.io/github/license/LAWTED/BUPT-Auto-Syllabu) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/LAWTED/BUPT-Auto-Syllabu) ![GitHub top language](https://img.shields.io/github/languages/top/LAWTED/BUPT-Auto-Syllabu?color=56ccf2) ![GitHub last commit](https://img.shields.io/github/last-commit/LAWTED/BUPT-Auto-Syllabu?color=yellow) [![wakatime](https://wakatime.com/badge/user/b538f533-3e8c-4b7b-ab49-7aab7771d31c/project/636b7c61-1a6a-466d-9dc4-7915b172c49f.svg)](https://wakatime.com/badge/user/b538f533-3e8c-4b7b-ab49-7aab7771d31c/project/636b7c61-1a6a-466d-9dc4-7915b172c49f)
 
 自动获取北邮课表导入苹果日历
 
-## 环境配置
+# version 2.0
+直接访问 lawted.tech (推荐)
 
+
+
+# version 1.0 (不推荐)
+
+## 环境配置
+校园网环境
 ``` python
 python 3.0
 pip
 ```
-
-
 
 ## 使用方法
 
@@ -47,7 +52,7 @@ year_week = 52 # 今年总周数
 Combine_Trigger = True # 连着几节的课程是否合并
 ```
 
-# linux 连接校园网
+## linux 连接校园网
 ```
 sudo openconnect --protocol=gp --script=/etc/vpnc/vpnc-script vpn.bupt.edu.cn
 ```

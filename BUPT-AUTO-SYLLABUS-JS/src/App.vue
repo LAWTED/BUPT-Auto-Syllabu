@@ -36,7 +36,7 @@
               <hr class="border-gray-300 border-1 w-full rounded-md">
             </div>
           </div>
-          <button @click='openurl' v-show="src !== ''">点击查看课表</button>
+          <button @click='openurl' v-show="src !== ''" class="bg-blue-500 w-full py-3 rounded-xl text-white shadow-xl hover:shadow-inner focus:outline-none transition duration-500 ease-in-out  transform hover:-translate-x hover:scale-105 mt-4">点击查看课表</button>
         </div>
       </div>
     </div>
@@ -88,3 +88,4 @@ const openurl = () => {
   color: #2c3e50;
 }
 </style>
+
