@@ -13,8 +13,8 @@ import platform
 
 # 高级设置
 year = '2022' # 年份
-xueqi = '2021-2022-2' # 学期数
-begin_week = 9 # 开学的当周，苹果日历中查看，打开设置中的周数
+xueqi = '2022-2023-1' # 学期数
+begin_week = 35 # 开学的当周，苹果日历中查看，打开设置中的周数
 year_week = 52 # 今年总周数
 Combine_Trigger = True # 连着几节的课程是否合并
 class ProcessBar(object):
