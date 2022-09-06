@@ -3,7 +3,8 @@
 
 自动获取北邮课表导入苹果日历
 
-# version 2.0
+# version 2.0(等待修复)
+## 因为最近西工大事件, 北邮对vpn进行加强改造,目前方案正在筹划,网页版本等待修复
 直接访问 lawted.tech (推荐)
 
 <img src="https://user-images.githubusercontent.com/56634309/155940362-19c70b23-2dad-4b15-84c0-752cd177c61b.gif" width="25%">
